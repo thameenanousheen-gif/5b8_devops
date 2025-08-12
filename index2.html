@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>5b8 regform2</title>
+  <style>
+    body {
+      background-color: rgb(110, 170, 190);
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 350px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+    }
+    label {
+      display: inline-block;
+      width: 120px;
+      margin-bottom: 10px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="tel"],
+    select {
+      width: 300px;
+      padding: 4px;
+    }
+    textarea {
+      width: 300px;
+      height: 40px;
+      padding: 4px;
+    }
+    .gender, .checkbox {
+      margin-left: 120px;
+      margin-bottom: 10px;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .buttons input {
+      margin: 5px;
+      padding: 5px 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>5b8 Registration Page</h1>
+    <form>
+      <label for="fname">First Name</label>
+      <input type="text" id="fname" name="fname"><br>
+
+      <label for="lname">Last Name</label>
+      <input type="text" id="lname" name="lname"><br>
+
+      <label for="dob">Date Of Birth</label>
+      <input type="date" id="dob" name="dob"><br>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email"><br>
+
+      <label>Gender</label>
+      <div class="gender">
+        <input type="radio" id="male" name="gender" value="Male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="Female">
+        <label for="female">Female</label>
+      </div>
+
+      <label for="phone">Phone No</label>
+      <input type="tel" id="phone" name="phone"><br>
+
+      <label for="address">Address</label>
+      <textarea id="address" name="address"></textarea><br>
+
+      <div class="checkbox">
+        <input type="checkbox" id="terms" name="terms">
+        <label for="terms">Accept terms and conditions</label>
+      </div>
+
+      <label for="branch">Branch</label>
+      <select id="branch" name="branch">
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="EEE">EEE</option>
+        <option value="ME">ME</option>
+        <option value="CE">CE</option>
+      </select><br>
+
+      <div class="buttons">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+      </div>
+    </form>
+  </div>
+  <script>
+  function validateForm(event) {
+    event.preventDefault(); 
+
+    const fname = document.getElementById("fname").value.trim();
+    const lname = document.getElementById("lname").value.trim();
+    const dob = document.getElementById("dob").value;
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const genderMale = document.getElementById("male").checked;
+    const genderFemale = document.getElementById("female").checked;
+    const terms = document.getElementById("terms").checked;
+
+    if (!fname || !lname || !dob || !email || !phone || !address) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    if (!genderMale && !genderFemale) {
+      alert("Please select your gender.");
+      return;
+    }
+
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    const phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    if (!terms) {
+      alert("You must accept the terms and conditions.");
+      return;
+    }
+
+    alert("Form submitted successfully!");
+  }
+  window.onload = function() {
+    document.querySelector("form").addEventListener("submit", validateForm);
+  };
+</script>
+</body>
+</html>
